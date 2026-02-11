@@ -77,7 +77,7 @@ public class RSProcessor {
 				int dataLength = field.length;
 				if(dataLength > 65535) {
 					//throw something here because we are only sending 2-byte lengths
-					throw new RuntimeException("Exceeded maximum single-field value length");
+					throw new RuntimeException("Exceeded maximum RapidStruct field length");
 				}
 				writeStream.write((byte) ((dataLength & 0xFFFF) >>> 8));
 				writeStream.write((byte) (dataLength & 0xFF));
@@ -155,7 +155,7 @@ public class RSProcessor {
 			byte[] rawValue = new byte[length];
 			int bytesRead = readStream.readBytes(rawValue);
 			if(bytesRead < length) {
-				//Throw something here because there was a problem.
+				throw new RuntimeException("Incomplete RapidStruct byte stream");
 			}
 			
 			if(nestedSchema == null)
