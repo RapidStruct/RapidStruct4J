@@ -1,6 +1,6 @@
 # RapidStruct4J
 
-RapidStruct is a bare-bones, schema-based binary serialization format. Read up on the specs for more info on RapidStruct itself. This guide is only concerned with the usage of the Java language library implementation.  For more info on the standard, [go here](https://github.com/RapidStruct/).  To start using this library, I recommend simply copying the files to your source folder.  Below is a quick rundown of the basics.
+RapidStruct is a bare-bones, schema-based binary serialization format. Read up on the specs for more info on RapidStruct itself. This guide is only concerned with the usage of the Java language library implementation. For more info on the standard, [go here](https://github.com/RapidStruct/). To start using this library, I recommend simply copying the files to your source folder. **If you just want to see a quick example [go here](#full-serialization-example).** Below is a quick rundown of the basics.
 
 ## Schemas
 
