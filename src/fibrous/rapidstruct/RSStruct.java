@@ -115,7 +115,27 @@ public class RSStruct {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+
+		if(schema.fieldTypes[schemaKey] != field.type)
+			throw new AssertionError("RSField of type " + field.type + " was added under type " + schema.fieldTypes[schemaKey]);
 		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed field and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * 
+	 * @param schemaKey
+	 * @param field
+	 */
+	public void add(int schemaKey, RSField field) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
+		
+		if(schema.fieldTypes[schemaKey] != field.type)
+			throw new AssertionError("RSField of type " + field.type + " was added under type " + schema.fieldTypes[schemaKey]);
+
 		storeField(field, schemaKey);
 	}
 	
@@ -125,12 +145,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a bool.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addBool(String tag, boolean value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putBool(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed boolean and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a bool.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addBool(int schemaKey, boolean value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putBool(value);
@@ -144,12 +182,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a byte.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addByte(String tag, byte value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putByte(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed byte and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a byte.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addByte(int schemaKey, byte value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putByte(value);
@@ -163,12 +219,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a short.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addShort(String tag, short value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putShort(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed short and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a short.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addShort(int schemaKey, short value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putShort(value);
@@ -182,12 +256,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a int.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addInt(String tag, int value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putInt(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed int and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a int.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addInt(int schemaKey, int value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putInt(value);
@@ -201,12 +293,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a long.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addLong(String tag, long value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putLong(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed long and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a long.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addLong(int schemaKey, long value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putLong(value);
@@ -220,12 +330,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a float.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addFloat(String tag, float value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putFloat(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed float and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a float.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addFloat(int schemaKey, float value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putFloat(value);
@@ -239,12 +367,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a double.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addDouble(String tag, double value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putDouble(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed double and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a double.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addDouble(int schemaKey, double value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putDouble(value);
@@ -259,12 +405,31 @@ public class RSStruct {
 	 * However, this method DOES NOT throw an AssertionError regardless of the definition for the tag and assumes you know what you are doing.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addBytes(String tag, byte[] value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putBytes(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed bytes and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * The primary usage for this method is to pass byte arrays and the type definition for specified key should generally be RAW.
+	 * However, this method DOES NOT throw an AssertionError regardless of the definition for the tag and assumes you know what you are doing.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addBytes(int schemaKey, byte[] value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putBytes(value);
@@ -278,12 +443,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a String.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addString(String tag, String value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putString(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed String and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a String.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addString(int schemaKey, String value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putString(value);
@@ -297,12 +480,30 @@ public class RSStruct {
 	 * Throws an AssertionError if the type that is defined for the tag is not a struct.
 	 * 
 	 * @param tag
-	 * @param field
+	 * @param value
 	 */
 	public void addStruct(String tag, RSStruct value) {
 		int schemaKey = schema.getSchemaKey(tag);
 		if(schemaKey == -1)
 			throw new RuntimeException("Schema definition for tag " + tag + " does not exist");
+		
+		RSField field = new RSField(schema.fieldTypes[schemaKey]);
+		field.putStruct(value);
+		
+		storeField(field, schemaKey);
+	}
+
+	/**
+	 * Takes the passed struct and adds it into this struct with the given schema key.
+	 * Throws an exception if no definition for the schema key is found in this struct's schema.
+	 * Throws an AssertionError if the type that is defined for the key is not a struct.
+	 * 
+	 * @param schemaKey
+	 * @param value
+	 */
+	public void addStruct(int schemaKey, RSStruct value) {
+		if(schemaKey == -1)
+			throw new RuntimeException("Schema key is invalid");
 		
 		RSField field = new RSField(schema.fieldTypes[schemaKey]);
 		field.putStruct(value);
@@ -330,14 +531,14 @@ public class RSStruct {
 	}
 	
 	/**
-	 * Returns the first field that has a matching key/index.
+	 * Returns the first field that has a matching schema key.
 	 * Returns null if there are currently no fields in this struct with the given key/index.
 	 * @param tag
 	 * @return
 	 */
-	public RSField get(int key) {
+	public RSField get(int schemaKey) {
 		for(int i = 0; i < fieldCount; i++) {
-			if(schemaKeys[i] == key)
+			if(schemaKeys[i] == schemaKey)
 				return fields[i];
 		}
 		
@@ -370,7 +571,7 @@ public class RSStruct {
 	 * @param tag
 	 * @return
 	 */
-	public ArrayList<RSField> getAllFieldsWithSchemaKey(int schemaKey) {
+	public ArrayList<RSField> getAllFieldsWithKey(int schemaKey) {
 		ArrayList<RSField> fieldList = new ArrayList<>();
 		for(int i = 0; i < fieldCount; i++) {
 			if(schemaKeys[i] == schemaKey)
@@ -390,6 +591,20 @@ public class RSStruct {
 		if(schemaKey == -1)
 			return false;
 		
+		for(int i = 0; i < fieldCount; i++) {
+			if(schemaKeys[i] == schemaKey)
+				return true;
+		}
+		
+		return false;
+	}
+
+	/**
+	 * Returns true if this struct contains a field with the given schema key.
+	 * @param schemaKey
+	 * @return
+	 */
+	public boolean hasField(int schemaKey) {
 		for(int i = 0; i < fieldCount; i++) {
 			if(schemaKeys[i] == schemaKey)
 				return true;

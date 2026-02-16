@@ -25,15 +25,13 @@
 package fibrous.rapidstruct;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
  * This class is how you ultimately write/read RSStructs to/from bytes.
  * While this class is thread-safe, it is recommended that you keep an instantiation's use limited to one thread, or possibly put into a pool.
  * This class uses an array as a buffer, so a lock has to be acquired before reading/writing to prevent buffer corruption from concurrent reads/writes.
- * You can instantiate multiple of these in order to processes things in parallel.
+ * You can instantiate multiple of these in order to process things in parallel.
  */
 public class RSProcessor {
 	

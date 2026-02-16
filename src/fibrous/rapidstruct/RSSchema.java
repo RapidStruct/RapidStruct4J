@@ -49,12 +49,13 @@ public class RSSchema {
 	
 	/**
 	 * Adds a field to the schema with the given type and tag.
+	 * Returns the schema key/index for this field.
 	 * Throws an exception if the passed tag has already been defined.
 	 * @param type
 	 * @param tag
 	 * @return
 	 */
-	public void addFieldToSchema(String tag, RSFieldType type) {
+	public int addFieldToSchema(String tag, RSFieldType type) {
 		if(type == RSFieldType.STRUCT)
 			throw new Error("A type of " + type.name() + " must be added with it's schema.  Use addStructToSchema(String, Schema) instead");
 		
@@ -65,17 +66,18 @@ public class RSSchema {
 		
 		fieldTypes[fieldCount] = type;
 		fieldTags[fieldCount] = tag;
-		fieldCount++;
+		return fieldCount++;
 	}
 	
 	/**
 	 * Adds a struct to the schema with the given tag.
+	 * Returns the schema key/index for this field.
 	 * Throws an exception if the passed tag has already been defined.
 	 * @param type
 	 * @param tag
 	 * @return
 	 */
-	public void addStructToSchema(String tag, RSSchema schema) {
+	public int addStructToSchema(String tag, RSSchema schema) {
 		for(int i = 0; i < fieldCount; i++) {
 			if(tag.equals(fieldTags[i]))
 				throw new Error("RSSchema tag " + tag + " has already been defined");
@@ -84,7 +86,7 @@ public class RSSchema {
 		fieldTypes[fieldCount] = RSFieldType.STRUCT;
 		fieldTags[fieldCount] = tag;
 		nestedSchemas[fieldCount] = schema;
-		fieldCount++;
+		return fieldCount++;
 	}
 	
 	/**

@@ -184,5 +184,26 @@ public class RSTest {
 }
 ~~~
 
+## String Comparison Elimination
+
+If you need to increase speed, instead of using the tag Strings to refer to fields, you can instead use an int that is derived from and tied to a specific tag.  To do this, when createing an `RSSchema`, simply assign an int to the return value of `addFieldToSchema()` or `addStructToSchema()`:
+
+~~~
+RSSchema schema = new RSSchema();
+int msKey = schema.addFieldToSchema("Milliseconds", RSFieldType.LONG);
+
+//You can also grab the key afterwords
+msKey = schema.getSchemaKey("Milliseconds");
+~~~
+
+And instead of accessing fields in the typical way, substitute the int key for the tag String:
+
+~~~
+rsStruct.addLong(msKey, 12345);
+long ms = rsStruct.get(msKey).asLong();
+~~~
+
+This allows you to bypass String comparison operations when accessing fields, possibly increasing performance depending on your situation. Most of the methods are overloaded to allow a direct swap from tag Strings to ints. However, there are a couple methods that didn't make sense to overload due to naming, so check those out if an overload doesn't work. I.e., `RSStruct.getAllWithTag()` should be swapped with `RSStruct.getAllWithKey()`.
+
 Copyright (c) 2026, Noah McLean
 
